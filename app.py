@@ -202,10 +202,12 @@ ASSESSMENT_ITEMS = [
                 "counts, coverage, and missingness satisfy documented use-case requirements."
             ),
         },
-        "evidence": (
-            "Required-modality specification; site-level data inventories; patient or "
-            "observation counts; modality coverage and missingness reports."
-        ),
+        "evidence": [
+            "Specification describing required modalities.",
+            "Site-level data inventories.",
+            "Patient or observation counts by modality and site.",
+            "Modality coverage and missingness reports.",
+        ],
     },
     {
         "category": "Data Characteristics",
@@ -232,10 +234,13 @@ ASSESSMENT_ITEMS = [
                 "all required sites and modalities, with material issues documented and managed."
             ),
         },
-        "evidence": (
-            "Data-quality specifications; accuracy or validity reports; missingness "
-            "rates; refresh schedules; label or annotation quality documentation."
-        ),
+        "evidence": [
+            "Specification outlining data-quality requirements and acceptance thresholds.",
+            "Accuracy or validity reports by modality and site.",
+            "Missingness and completeness reports by modality and site.",
+            "Data-refresh schedules and timeliness reports.",
+            "Label or annotation quality documentation.",
+        ],
     },
     {
         "category": "Data Characteristics",
@@ -262,10 +267,13 @@ ASSESSMENT_ITEMS = [
                 "compared across sites, and material representation gaps are addressed."
             ),
         },
-        "evidence": (
-            "Target-population definition; site demographic and clinical summaries; "
-            "subgroup counts; modality coverage or missingness by subgroup."
-        ),
+        "evidence": [
+            "Specification defining the target population, with documented cohort inclusion and exlcusion criteria.",
+            "Demographic and clinical summaries by site.",
+            "Patient counts for relevant subgroups by site.",
+            "Modality coverage and missingness reports by subgroup.",
+            "Cross-site population comparison reports.",
+        ],
     },
     {
         "category": "Integration Readiness",
@@ -292,10 +300,13 @@ ASSESSMENT_ITEMS = [
                 "consistently applied, and version controlled across sites."
             ),
         },
-        "evidence": (
-            "Data dictionaries; schemas; coding systems; measurement units; feature, "
-            "cohort, and outcome definitions; mappings; version histories."
-        ),
+        "evidence": [
+            "Specification outlining common feature and outcome-label definitions.",
+            "Documentation of allowable coding systems and measurement units.",
+            "Site-level data dictionaries, schemas, and feature lists.",
+            "Mapping between site-specific and common definitions, codes, or units.",
+            "Version-controlled definitions, mappings, and change logs.",
+        ],
     },
     {
         "category": "Integration Readiness",
@@ -322,10 +333,13 @@ ASSESSMENT_ITEMS = [
                 "compatible documented rules that meet use-case requirements."
             ),
         },
-        "evidence": (
-            "Patient- and encounter-linkage specifications; clinical-event definitions; "
-            "temporal windows; paired-record coverage; linkage-quality reports."
-        ),
+        "evidence": [
+            "Specification detailing patient and encounter linkage methods, event definitions, and temporal rules.",
+            "Documented definitions of clinical episodes or events.",
+            "Temporal alignment rules for each modality.",
+            "Coverage rates for linked modalities by site.",
+            "Linkage-quality reports and error-rate estimates.",
+        ],
     },
     {
         "category": "Organizational Readiness",
@@ -353,10 +367,14 @@ ASSESSMENT_ITEMS = [
                 "risks have been assessed, with compatible controls documented."
             ),
         },
-        "evidence": (
-            "Site requirements matrix; modality-specific risk assessments; access, "
-            "encryption, and de-identification controls; model-update protections."
-        ),
+        "evidence": [
+            "Cross-site privacy and security requirements matrix.",
+            "Modality-specific privacy and security risk assessments.",
+            "Combined-modality re-identification risk assessment.",
+            "Access-control and authorization documentation.",
+            "Encryption and de-identification procedures and reports.",
+            "Federated model-update privacy and security controls.",
+        ],
     },
     {
         "category": "Organizational Readiness",
@@ -383,10 +401,14 @@ ASSESSMENT_ITEMS = [
                 "permitted uses, ownership, agreements, and responsibilities are documented."
             ),
         },
-        "evidence": (
-            "Source inventories; lineage and transformation records; data-use agreements; "
-            "ownership and stewardship assignments; cross-site governance roles."
-        ),
+        "evidence": [
+            "Data source and collection method inventories.",
+            "Data lineage and transformation records.",
+            "Data use agreements and permitted-use documentation.",
+            "Ownership and stewardship assignments.",
+            "Governance charters, policies, and procedures.",
+            "Audit logs and change-control documentation.",
+        ],
     },
 ]
 
@@ -461,7 +483,10 @@ for index, item in enumerate(ASSESSMENT_ITEMS):
             key=f"evidence_{index}",
         )
 
-        st.caption(f"Examples of relevant evidence: {item['evidence']}")
+        st.markdown("**Examples of relevant evidence:**")
+
+        for evidence_item in item["evidence"]:
+            st.markdown(f"- {evidence_item}")
 
         responses.append(
             {
