@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from pdf_report import generate_assessment_pdf
 
 st.set_page_config(
     page_title="MHDRM Data Readiness Assessment",
@@ -608,7 +609,21 @@ else:
 
     results_df = pd.DataFrame(results_rows)
 
-    csv_data = results_df.to_csv(index=False).encode("utf-8")
+    pdf_data = generate_assessment_pdf(
+        project_name=project_name,
+        use_case=use_case,
+        outcome_variable=outcome_variable,
+        sites=sites,
+        target_population=target_population,
+        required_modalities=required_modalities,
+        responses=responses,
+        total_score=total_score,
+        maximum_score=maximum_score,
+        readiness_percentage=readiness_percentage,
+        readiness_level=readiness_level,
+        critical_gaps=critical_gaps,
+        evidence_gaps=evidence_gaps,
+    )
 
     # display the results and make them available for download
     st.subheader("Download Results")
@@ -629,10 +644,10 @@ else:
     )
 
     st.download_button(
-        label="Download assessment results as CSV",
-        data=csv_data,
-        file_name="mhdrm_assessment_results.csv",
-        mime="text/csv",
+        label="Download assessment report as PDF",
+        data=pdf_data,
+        file_name="mhdrm_assessment_report.pdf",
+        mime="application/pdf",
         use_container_width=True,
     )
 
