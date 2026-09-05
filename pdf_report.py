@@ -65,6 +65,15 @@ def generate_assessment_pdf(
         spaceAfter=8,
     )
 
+    table_header_style = ParagraphStyle(
+        name="TableHeader",
+        parent=body_style,
+        fontName="Helvetica-Bold",
+        fontSize=8,
+        leading=10,
+        textColor=colors.white,
+    )
+
     subtitle_style = ParagraphStyle(
         name="AssessmentSubtitle",
         parent=styles["Normal"],
@@ -200,9 +209,9 @@ def generate_assessment_pdf(
 
     summary_data = [
         [
-            Paragraph("Total score", label_style),
-            Paragraph("Readiness", label_style),
-            Paragraph("Classification", label_style),
+            Paragraph("Total score", table_header_style),
+            Paragraph("Readiness", table_header_style),
+            Paragraph("Classification", table_header_style),
         ],
         [
             Paragraph(f"{total_score}/{maximum_score}", classification_style),
@@ -251,11 +260,11 @@ def generate_assessment_pdf(
 
     results_data = [
         [
-            Paragraph("Category", label_style),
-            Paragraph("MHDRM pillar", label_style),
-            Paragraph("Response", label_style),
-            Paragraph("Score", label_style),
-            Paragraph("Flag", label_style),
+            Paragraph("Category", table_header_style),
+            Paragraph("MHDRM pillar", table_header_style),
+            Paragraph("Response", table_header_style),
+            Paragraph("Score", table_header_style),
+            Paragraph("Flag", table_header_style),
         ]
     ]
 
