@@ -65,15 +65,6 @@ def generate_assessment_pdf(
         spaceAfter=8,
     )
 
-    table_header_style = ParagraphStyle(
-        name="TableHeader",
-        parent=body_style,
-        fontName="Helvetica-Bold",
-        fontSize=8,
-        leading=10,
-        textColor=colors.white,
-    )
-
     subtitle_style = ParagraphStyle(
         name="AssessmentSubtitle",
         parent=styles["Normal"],
@@ -124,6 +115,15 @@ def generate_assessment_pdf(
         fontSize=9,
         leading=11,
         textColor=colors.HexColor("#123B5D"),
+    )
+
+    table_header_style = ParagraphStyle(
+        name="TableHeader",
+        parent=body_style,
+        fontName="Helvetica-Bold",
+        fontSize=8,
+        leading=10,
+        textColor=colors.white,
     )
 
     # Build the PDF content
