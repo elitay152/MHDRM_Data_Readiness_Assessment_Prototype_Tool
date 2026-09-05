@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 st.set_page_config(
     page_title="MHDRM Data Readiness Assessment",
@@ -142,6 +143,11 @@ project_name = st.text_input(
 )
 
 use_case = st.text_area(
+    "MMFL use case",
+    placeholder="Describe the specific MMFL use case to be implemented.",
+)
+
+outcome_variable = st.text_area(
     "Common learning objective",
     placeholder="Describe the outcome the participating sites intend to model.",
 )
@@ -548,11 +554,12 @@ else:
     else:
         readiness_level = "Preliminary cross-site compatibility"
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
 
     col1.metric("Total score", f"{total_score}/{maximum_score}")
     col2.metric("Readiness percentage", f"{readiness_percentage:.1f}%")
-    col3.metric("Prototype classification", readiness_level)
+
+    st.metric("Prototype classification", readiness_level)
 
     # warning and error messages for evidence gaps and critical gaps
     if evidence_gaps:
@@ -566,6 +573,68 @@ else:
             "Potential critical gaps were identified for: "
             + ", ".join(critical_gaps)
         )
+
+    # Prepare downloadable assessment results
+    results_rows = []
+
+    for response in responses:
+        if response["response"] == "N/E — Insufficient evidence":
+            gap_type = "Evidence gap"
+        elif response["score"] == 0:
+            gap_type = "Critical gap"
+        else:
+            gap_type = ""
+
+        results_rows.append(
+            {
+                "Project Name": project_name,
+                "MMFL Use Case": use_case,
+                "Target Outcome": outcome_variable,
+                "Participating Sites": sites.replace("\n", "; "),
+                "Target Population": target_population,
+                "Required Modalities": "; ".join(required_modalities),
+                "Category": response["category"],
+                "Pillar": response["pillar"],
+                "Selected Response": response["response"],
+                "Pillar Score": response["score"],
+                "Evidence and Rationale": response["evidence_notes"],
+                "Gap Type": gap_type,
+                "Total Score": total_score,
+                "Maximum Score": maximum_score,
+                "Readiness Percentage": round(readiness_percentage, 1),
+                "Compatibility Classification": readiness_level,
+            }
+        )
+
+    results_df = pd.DataFrame(results_rows)
+
+    csv_data = results_df.to_csv(index=False).encode("utf-8")
+
+    # display the results and make them available for download
+    st.subheader("Download Results")
+
+    st.dataframe(
+        results_df[
+            [
+                "Category",
+                "Pillar",
+                "Selected Response",
+                "Pillar Score",
+                "Gap Type",
+                "Evidence and Rationale",
+            ]
+        ],
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    st.download_button(
+        label="Download assessment results as CSV",
+        data=csv_data,
+        file_name="mhdrm_assessment_results.csv",
+        mime="text/csv",
+        use_container_width=True,
+    )
 
     st.caption(
         """
