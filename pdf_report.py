@@ -361,6 +361,87 @@ def generate_assessment_pdf(
     story.append(results_table)
     story.append(Spacer(1, 12))
 
+    # Evidence and rationale
+    story.append(Paragraph("Evidence and Rationale", heading_style))
+
+    evidence_data = [
+        [
+            Paragraph("MHDRM pillar", table_header_style),
+            Paragraph("Evidence reviewed and scoring rationale", table_header_style),
+        ]
+    ]
+
+    for response in responses:
+        evidence_notes = response.get("evidence_notes", "")
+
+        evidence_data.append(
+            [
+                Paragraph(
+                    safe_text(response["pillar"]),
+                    small_style,
+                ),
+                Paragraph(
+                    safe_text(evidence_notes),
+                    small_style,
+                ),
+            ]
+        )
+
+    evidence_table = Table(
+        evidence_data,
+        colWidths=[
+            1.9 * inch,
+            4.9 * inch,
+        ],
+        repeatRows=1,
+        hAlign="LEFT",
+    )
+
+    evidence_table.setStyle(
+        TableStyle(
+            [
+                (
+                    "BACKGROUND",
+                    (0, 0),
+                    (-1, 0),
+                    colors.HexColor("#176B78"),
+                ),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                (
+                    "ROWBACKGROUNDS",
+                    (0, 1),
+                    (-1, -1),
+                    [
+                        colors.white,
+                        colors.HexColor("#F5F8FA"),
+                    ],
+                ),
+                (
+                    "BOX",
+                    (0, 0),
+                    (-1, -1),
+                    0.6,
+                    colors.HexColor("#ABC9D1"),
+                ),
+                (
+                    "INNERGRID",
+                    (0, 0),
+                    (-1, -1),
+                    0.35,
+                    colors.HexColor("#C9DCE3"),
+                ),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LEFTPADDING", (0, 0), (-1, -1), 5),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 5),
+                ("TOPPADDING", (0, 0), (-1, -1), 5),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+            ]
+        )
+    )
+
+    story.append(evidence_table)
+    story.append(Spacer(1, 12))
+
     # Gap summary
     if critical_gaps:
         story.append(
