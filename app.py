@@ -205,7 +205,7 @@ ASSESSMENT_ITEMS = [
                 "but meaningful differences in coverage or missingness remain."
             ),
             "2": (
-                "Demonstrated: All required modalities are avaialble, and their "
+                "Demonstrated: All required modalities are available, and their "
                 "counts, coverage, and missingness satisfy documented use-case requirements."
             ),
         },
@@ -253,7 +253,7 @@ ASSESSMENT_ITEMS = [
         "category": "Data Characteristics",
         "pillar": "Population Representativeness",
         "question": (
-            "To what extent does each site's eligible patient population and relevant subgroups adequately "
+            "To what extent do each site's eligible patient population and relevant subgroups adequately "
             "represent the target population for the proposed MMFL use case?"
         ),
         "anchors": {
@@ -275,7 +275,7 @@ ASSESSMENT_ITEMS = [
             ),
         },
         "evidence": [
-            "Specification defining the target population, with documented cohort inclusion and exlcusion criteria.",
+            "Specification defining the target population, with documented cohort inclusion and exclusion criteria.",
             "Demographic and clinical summaries by site.",
             "Patient counts for relevant subgroups by site.",
             "Modality coverage and missingness reports by subgroup.",
