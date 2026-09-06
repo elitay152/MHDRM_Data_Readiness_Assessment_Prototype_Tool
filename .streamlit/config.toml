@@ -1,2 +1,14 @@
 [theme]
 primaryColor = "#176B78"
+
+[theme.light]
+backgroundColor = "#F5F8FA"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#303744"
+borderColor = "#C9DCE3"
+
+[theme.dark]
+backgroundColor = "#0E1117"
+secondaryBackgroundColor = "#1C212B"
+textColor = "#FAFAFA"
+borderColor = "#46515F"
