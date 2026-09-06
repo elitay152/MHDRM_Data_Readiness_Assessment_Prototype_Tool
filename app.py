@@ -14,7 +14,8 @@ st.markdown(
     <style>
     /* Main page */
     .stApp {
-        background-color: #f5f8fa;
+        background-color: var(--background-color);
+        color: var(--text-color);
     }
 
     /* Limit width and improve spacing */
@@ -41,7 +42,8 @@ st.markdown(
 
     /* Expanders containing the seven pillars */
     [data-testid="stExpander"] {
-        background-color: #ffffff;
+        background-color: var(--secondary-background-color);
+        color: var(--text-color);
         border: 1px solid #c9dce3;
         border-left: 5px solid #258395;
         border-radius: 8px;
@@ -52,13 +54,15 @@ st.markdown(
     /* Text inputs and text areas */
     [data-testid="stTextInput"] input,
     [data-testid="stTextArea"] textarea {
-        background-color: #ffffff;
+        background-color: var(--secondary-background-color);
+        color: var(--text-color);
         border-color: #abc9d1;
     }
 
     /* Metric cards */
     [data-testid="stMetric"] {
-        background-color: #ffffff;
+        background-color: var(--secondary-background-color);
+        color: var(--text-color);
         border: 1px solid #c9dce3;
         border-top: 4px solid #258395;
         border-radius: 8px;
