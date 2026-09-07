@@ -554,10 +554,11 @@ else:
     # set thresholds for readiness classification based on percentage score
     if readiness_percentage < 40:
         readiness_level = "Substantial preparation needed"
-    elif readiness_percentage < 70:
-        readiness_level = "Partial cross-site compatibility"
-    else:
+    # preliminary compatibility requires both score > 70% and no pillar scored 0 or N/E
+    elif readiness_percentage >= 70 and not critical_gaps and not evidence_gaps:
         readiness_level = "Preliminary cross-site compatibility"
+    else:
+        readiness_level = "Partial cross-site compatibility"
 
     col1, col2 = st.columns(2)
 
